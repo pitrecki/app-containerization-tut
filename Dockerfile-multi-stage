@@ -1,0 +1,27 @@
+FROM gradle:4.6.0-jdk8-alpine AS builder
+
+LABEL maintainer='Piotr Nowak'
+
+COPY backend /home/gradle/backend
+
+USER root
+RUN gradle -b backend/build.gradle clean build
+
+FROM openjdk:8-jdk-alpine
+
+LABEL maintainer='Piotr Nowak'
+
+RUN adduser -D -g '' spring
+
+COPY ./backend/build/libs/*.jar /home/spring
+
+WORKDIR /home/spring
+RUN mv *.jar app.jar && \
+    chown spring:spring app.jar
+
+EXPOSE 8080
+USER spring
+
+ENTRYPOINT ["java", "-jar"]
+CMD ["app.jar"]
+
