@@ -33,6 +33,8 @@ curl -XGET localhost:8080/api/people_data?amount=<desired_number_less_than_100>
 ```
 
 Usefull cheatsheets and other thigs
+
 [docker cheatsheet](https://github.com/wsargent/docker-cheat-sheet)
+
 [best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
